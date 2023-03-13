@@ -12,24 +12,17 @@
 */
 
 // debe sumar dos numeros
-function sumar(a, b) {
-  return a + b;
-}
+const sumar = (a, b) => a + b;
 
 // debe restar dos numeros
 // debe comprobar que los parametros sean anviados, de lo contrario debe retotnar inmediatamente
-function restar(a, b) {
-  if (!a || !b) {
-    return;
-  }
-
+const restar = (a, b) => {
+  if (!a || !b) return;
   return a - b;
 }
 
 // debe retornar "Hola {nombre}" donde nombre corresponde al argumento enviado.
-function saludar(nombre) {
-  return "Hola " + nombre;
-}
+const saludar = (nombre) => "Hola " + nombre;
 
 /* 
   TODO: ARREGLAR FUNCIONES Y PASARLAS A FUNCIONES FLECHA
@@ -42,8 +35,9 @@ function saludar(nombre) {
 // dede retornar un entero igual a la cantidad de argumentos que recibe
 // Ejemplo: una funcion que reciba cuatro argumentos debe retornar 4 -> fn(a,b,c,d) => 4
 
-function contarArgs() {
-  return args;
+const args = [];
+const contarArgs = (...args) => {
+  return args.length;
 }
 
 // La siguiente funcion debe retornar un objeto igual al que recibe, pero con una propiedad extra
@@ -61,7 +55,14 @@ function contarArgs() {
 
 */
 
-function copiaObjetos(objeto) {}
+const copiaObjetos = (obj) => {
+  if (typeof obj !== 'object') return 'Error, no es un objeto';
+  const completedObj = {
+  	...obj,
+  	completado: true
+  } 
+	return completedObj;
+}
 
 // La siguiente funcion debe cambiar la propiedad de un objeto, para esto debera:
 // recibir como argumento: un objeto - el nombre de la clave que se quiere modificar - el valor que se quiere asignar a la clave
@@ -86,7 +87,13 @@ function copiaObjetos(objeto) {}
   *Pudiendo luego asignar directamente el nuevo valor, como si de un setter se tratase: auto['color'] = 'rojo'
 */
 
-function cambiaValorObjeto(objeto, clave, valor) {}
+const cambiaValorObjeto = (obj, key, value) => {
+	if (typeof obj !== 'object') return 'Error, no es un obj';
+  if (typeof key !== 'string') return 'Error, no es un string';
+	if (!(key in obj)) return 'Error, la clave no existe'; 
+  obj[key] = value; 
+  return obj;
+}
 
 // TODO: EJERCICIO 2 - DESESTRUCTURACION
 // TODO: RESOLVER LOS SIGUIENTES EJERCICIOS CON DESESTRUCTURACION
@@ -97,7 +104,7 @@ function cambiaValorObjeto(objeto, clave, valor) {}
 
 // *Al finalizar el ejercicio el test debera estar en 'passed'
 
-function desestructuracion1() {
+const desestructuracion1 = () => {
   const persona = {
     id: "0000000001",
     nombre: "Juan",
@@ -111,6 +118,8 @@ function desestructuracion1() {
       },
     },
   };
+  
+  const { id, nombre, direccion: { otros: { numero, entreCalles: [ calle1, calle2 ] } } } = persona;
 
   return {
     id,
@@ -125,9 +134,10 @@ function desestructuracion1() {
 
 // Resolver con desestructuracion por posicion
 //! NO CAMBIAR LOS VALORES DEL ARRAY DE NOMBRES
-
-function desestructuracion2() {
+ 
+const desestructuracion2 = () => {
   const nombres = ["Clemente", "Veronica", "Juan", "Daniela"];
+  const [ nombre1, nombre2, nombre3, nombre4 ] = nombres
 
   return {
     nombre1,
